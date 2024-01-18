@@ -20,7 +20,7 @@ def density_R2(r, z):
     return ((1-r)/r)**s/2
 
 def posterior_R2(r, z):
-    return quad(lambda x: density_R2(x, z), 10^(-6), r)[0]/quad(lambda x: density_R2(x, z), 10^(-6), 1 - 10^(-6))[0]
+    return quad(lambda x: density_R2(x, z), 10**(-3), r)[0]/quad(lambda x: density_R2(x, z), 10**(-3), 1 - 10**(-3))[0]
 
 def find_nearest_idx(value, array):
     idx = np.abs(array - value).argmin()
@@ -64,8 +64,8 @@ def sample_z(Y, X, q_start, R_2_start, num_iterations, z, support):
                 non_zeros_index_0 = np.nonzero(zeta_0)[0]
 
                 # Here, for exemple, we compute X_tilde for the case where the i-th cooridinate of X is null or not
-                X_tilde = X[ : , non_zeros_index]
-                X_tilde_0 = X[ : , non_zeros_index_0]
+                X_tilde = X.iloc[ : , non_zeros_index]
+                X_tilde_0 = X.iloc[ : , non_zeros_index_0]
 
                 # Same for W_tilde
                 W_tilde = (np.dot(X_tilde.T, X_tilde) + np.eye(len(non_zeros_index))/gamma_2)
